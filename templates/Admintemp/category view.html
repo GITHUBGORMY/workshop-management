@@ -1,0 +1,29 @@
+{% extends "Admintemp/index.html" %}
+{%load crispy_forms_tags %}
+{% block content %}
+
+ <div class=" text-center rounded p-4">
+<div class="card text-center mb-3  ">
+  <div class="card-body card card-light-blue ">
+<div class="table-responsive">
+  <table class="table align-middle table table-bordered">
+                          <thead>
+                            <tr>
+                              <th scope="col">Title</th>
+                              <th scope="col">Description</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {% for i in data %}
+                            <tr>
+                              <th scope="row">{{i.title}}</th>
+                              <th scope="row">{{i.description}}</th>
+                            </tr>
+                            {% endfor %}
+                          </tbody>
+      </table>
+  </div>
+</div>
+</div>
+ </div>
+{%endblock%}

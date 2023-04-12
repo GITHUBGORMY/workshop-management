@@ -1,0 +1,35 @@
+ {% extends "Admintemp/index.html" %}
+{%load crispy_forms_tags %}
+{% block content %}
+<div class="card text-center mb-3">
+  <div class="card-body card card-light-blue">
+<div class="table-responsive">
+  <table class="table align-middle table table-bordered">
+                          <thead>
+                            <tr>
+                              <th scope="col">User</th>
+                              <th scope="col">Date</th>
+                              <th scope="col">Message</th>
+                              <th scope="col">Reply</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {% for i in data %}
+                            <tr>
+                              <th scope="row">{{i.user}}</th>
+                              <th scope="row">{{i.date}}</th>
+                              <th scope="row">{{i.message}}</th>
+                              <th scope="row">{{i.reply}}</th>
+                                <th scope="row">
+                                    <a href="{% url 'reply_feedback' i.id %}">
+                                        <button type="button" class="btn btn-primary">Reply</button>
+                                    </a>
+                                </th>
+                            </tr>
+                            {% endfor %}
+                          </tbody>
+                        </table>
+</div>
+  </div>
+</div>
+{% endblock %}
