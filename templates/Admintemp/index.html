@@ -316,17 +316,14 @@
             </div>
           </li>
           <li class="nav-item">
-
-<!--            <a href=" {% url 'manager_view' %} " class="nav-item nav-link"><i class="fa fa-th me-2"></i>Manager</a>-->
-
            <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
               <i class="icon-layout menu-icon"></i>
-              <span class="menu-title">Manager</span>
+              <span class="menu-title">Customer</span>
               <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href=" {% url 'manager_view' %} " >View</a></li>
+                <li class="nav-item"> <a class="nav-link" href=" {% url 'customer_view' %} " >View</a></li>
 <!--                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/dropdowns.html">Dropdowns</a></li>-->
 <!--                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Typography</a></li>-->
               </ul>
@@ -362,30 +359,31 @@
               </ul>
             </div>
           </li>
+
           <li class="nav-item">
-             <a class="nav-link" data-toggle="collapse" href=" {% static '#auth' %} " aria-expanded="false" aria-controls="auth">
+             <a class="nav-link" data-toggle="collapse" href=" #auth " aria-expanded="false" aria-controls="auth">
               <i class="icon-head menu-icon"></i>
-              <span class="menu-title">User Pages</span>
+              <span class="menu-title">Schedule</span>
               <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="auth">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href=" {% static 'pages/samples/login.html' %} "> Login </a></li>
-                <li class="nav-item"> <a class="nav-link" href=" {% static 'pages/samples/register.html' %} "> Register </a></li>
+<!--             <li class="nav-item"> <a class="nav-link" href=" {% url 'schedule_fun' %} "> Schedule </a></li>-->
+                <li class="nav-item"> <a class="nav-link" href=" {% url 'schedule_view' %} "> View </a></li>
               </ul>
             </div>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href=" {% static '#error' %} " aria-expanded="false" aria-controls="error">
+             <a class="nav-link" data-toggle="collapse" href=" #error " aria-expanded="false" aria-controls="error">
               <i class="icon-ban menu-icon"></i>
-              <span class="menu-title">Error pages</span>
+              <span class="menu-title">Payment</span>
               <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="error">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href=" {% static 'pages/samples/error-404.html' %} "> 404 </a></li>
-                <li class="nav-item"> <a class="nav-link" href=" {% static 'pages/samples/error-500.html' %} "> 500 </a></li>
+                <li class="nav-item"> <a class="nav-link" href=" {% url 'payment' %} "> payment Request </a></li>
+<!--                <li class="nav-item"> <a class="nav-link" href=" {% static 'pages/samples/error-500.html' %} "> 500 </a></li>-->
               </ul>
             </div>
           </li>
@@ -799,7 +797,7 @@
 <!--												<div class="form-check form-check-flat">-->
 <!--													<label class="form-check-label">-->
 <!--														<input class="checkbox" type="checkbox" checked>-->
-<!--														Duplicate a project for new customer-->
+<!--														Duplicate a project for new worker-->
 <!--													</label>-->
 <!--												</div>-->
 <!--												<i class="remove ti-close"></i>-->

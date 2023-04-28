@@ -1,0 +1,44 @@
+ {% extends "Admintemp/index.html" %}
+{%load crispy_forms_tags %}
+{% block content %}
+
+ <div class=" text-center rounded p-4">
+<div class="card text-center mb-3  ">
+  <div class="card-body card card-light-blue ">
+<div class="table-responsive">
+  <table class="table align-middle table table-bordered">
+                          <thead>
+                            <tr>
+                                <th scope="col">name</th>
+                              <th scope="col">Description</th>
+                              <th scope="col">Status</th>
+                              <th scope="col">Start time</th>
+                              <th scope="col">End time</th>
+                               <th scope="col">Date</th>
+                               <th scope="col">Generate bill</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {% for i in data %}
+                            <tr>
+                              <td scope="row">{{i.user}}</td>
+                              <td scope="row">{{i.description}}</td>
+                              <td scope="row">{{i.status}}</td>
+                              <td scope="row">{{i.schedule.start_time}}</td>
+                              <td scope="row">{{i.schedule.end_time}}</td>
+                              <td scope="row">{{i.schedule.date}}</td>
+                                 <td>
+                                  <a  href="{% url 'bill' %}">
+                                        <input class="btn btn-primary" type="button" value="Bill">
+                                    </a>
+                              </td>
+
+                            </tr>
+                            {% endfor %}
+                          </tbody>
+      </table>
+  </div>
+</div>
+</div>
+ </div>
+{%endblock%}

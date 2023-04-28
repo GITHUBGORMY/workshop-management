@@ -1,9 +1,15 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.forms import forms
 
-from workshopApp.models import Login, feedback, category, schedule
+from workshopApp.models import Login, feedback, category, schedule, Appointment, Payment
 from django import forms
 #
+class DateInput(forms.DateInput):
+    input_type = 'date'
+
+class Timeinput(forms.TimeInput):
+    input_type = 'time'
+
 class workerForm(UserCreationForm):
     class Meta:
         model= Login
@@ -18,7 +24,7 @@ class feedbackForm(forms.ModelForm):
     class Meta:
         model = feedback
         fields = ('message','reply')
-        # exclude = ("user","reply")
+        exclude = ("user","reply")
 
 class WorkerCategoryForm(forms.ModelForm):
     class Meta:
@@ -26,9 +32,22 @@ class WorkerCategoryForm(forms.ModelForm):
         fields = ("title", "description", )
 
 class ScheduleForm(forms.ModelForm):
+    date = forms.DateField(widget=DateInput)
+    start_time = forms.TimeField(widget=Timeinput)
+    end_time = forms.TimeField(widget=Timeinput)
     class Meta:
         model = schedule
         fields = ('date','start_time','end_time')
+
+class AppointmentForm(forms.ModelForm):
+    class Meta:
+        model = Appointment
+        fields = ('worker','schedule','status')
+class PaymentForm(forms.ModelForm):
+    date = forms.DateField(widget=DateInput)
+    class Meta:
+        model = Payment
+        fields = ('description','status','date','amount')
 
 
 

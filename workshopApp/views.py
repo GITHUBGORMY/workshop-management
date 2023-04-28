@@ -1,14 +1,13 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from django.db.models import manager
-from django.shortcuts import render
+# from django.db.models import customer
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
 
-from workshopApp.forms import feedbackForm, WorkerCategoryForm, managerForm
+from workshopApp.forms import managerForm
 from workshopApp.forms import workerForm
-from workshopApp.models import feedback, category, Login
+from workshopApp.models import Login
 
 
 def fun(request):
@@ -41,9 +40,9 @@ def login_view(request):
             if user.is_staff:
                 return redirect('admindash')
             elif user.is_worker:
+                return redirect('workerdash')
+            elif user.is_customer:
                 return redirect('customerdash')
-            elif user.is_manager:
-                return redirect('managerdash')
         else:
             messages.info(request,'invalid credentials')
     return render(request,'Modified_files/login.html')
@@ -60,36 +59,35 @@ def worker_register(request):
             worker.user = user
             worker.save()
             messages.info(request,'registration successfully complete')
-            return redirect("work_view")
+            return redirect("workerdash")
     return render(request,'Modified_files/register.html',{'worker_form': worker_Form})
 #
 def manager_register(request):
-
     manager_Form = managerForm()
     if request.method == 'POST':
         manager_Form = managerForm(request.POST,request.FILES)
         if  manager_Form.is_valid():
             user=manager_Form.save(commit=False)
-            user.is_manager =True
+            user.is_customer =True
             user.save()
             manager = manager_Form.save(commit=False)
             manager.user = user
             manager.save()
             messages.info(request,'registration successfully complete')
-            return redirect("view")
+            return redirect("customerdash")
     return render(request,'Modified_files/register.html',{'manager_Form': manager_Form})
-def view(request):
-    data = manager.objects.all()
-    return render(request,'register/view.html',{"data":data})
+# def view(request):
+#     data = Login.objects.all()
+#     return render(request,'register/view.html',{"data":data})
 
 #
 def work_view(request):
     data = Login.objects.filter(is_worker=True)
-    return render(request,'Admintemp/customer_view.html',{"data":data})
+    return render(request,'Admintemp/worker_view.html',{"data":data})
 #
-def manager_view(request):
-    data =Login.objects.filter(is_manager=True)
-    return render(request,'Admintemp/manager_view.html',{"data":data})
+def customer_view(request):
+    data =Login.objects.filter(is_customer=True)
+    return render(request,'Admintemp/customer_view.html',{"data":data})
 #
 #
 def worker_delete(request,id):
@@ -104,7 +102,7 @@ def worker_update(request,id):
         if form.is_valid():
             form.save()
             return redirect('work_view')
-    return render(request,'customer/update.html',{'form':form})
+    return render(request,'worker/update.html',{'form':form})
 def manager_delete(request,id):
     data =Login .objects.get(id=id)
     data.delete()
@@ -117,7 +115,7 @@ def manager_update(request,id):
         if form.is_valid():
             form.save()
             return redirect('manager_view')
-    return render(request,'manager/update.html',{'form':form})
+    return render(request,'customer/update.html',{'form':form})
 #
 def logout_view(request):
     logout(request)

@@ -1,0 +1,42 @@
+{% extends "customer/customerbase.html" %}
+{%load crispy_forms_tags %}
+{% block content %}
+
+ <div class=" text-center rounded p-4">
+<div class="card text-center mb-3  ">
+  <div class="card-body card card-light-blue ">
+<div class="table-responsive">
+  <table class="table align-middle table table-bordered">
+                          <thead>
+                            <tr>
+                              <th scope="col">User</th>
+                              <th scope="col">Date</th>
+                              <th scope="col">Start time</th>
+                              <th scope="col">End time</th>
+                              <th scope="col">Book</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {% for i in data %}
+                            <tr>
+                                 {% if i.user.is_worker %}
+                              <th scope="row">{{i.user}}</th>
+                              <th scope="row">{{i.date}}</th>
+                              <th scope="row">{{i.start_time}}</th>
+                              <th scope="row">{{i.end_time}}</th>
+                               <th scope="row">
+                <a href="{% url 'book_appointment' i.id %}">
+                    <input class="btn btn-primary" type="Submit" value="Book Appointment">
+                </a>
+            </th>
+                                {%endif%}
+
+                            </tr>
+                            {% endfor %}
+                          </tbody>
+      </table>
+  </div>
+</div>
+</div>
+ </div>
+{%endblock%}

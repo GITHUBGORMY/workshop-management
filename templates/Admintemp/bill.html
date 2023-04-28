@@ -1,0 +1,26 @@
+{% extends "Admintemp/index.html" %}
+{% load static %}
+{% load crispy_forms_filters %}
+
+{% block content %}
+<div class="card text-center mb-3  ">
+  <div class="card-body card card-light-blue">
+    <h2>Generate Bill </h2>
+     <form class="pt-3" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+      <div class="form-group">
+      <label for="customer">Customer:{{.user}}</label>
+    </div>
+    <div class="form-group">
+      <label for="date">date:{{data.date}}</label>
+    </div>
+    <div class="form-group">
+      <label for="amount">amount:{{data.amount}}</label>
+    </div>
+<!--    <input type="hidden" name="worker" value="{{ schedule.worker.id }}">-->
+    <button type="submit" class="btn btn-primary">Book</button>
+</form>
+
+</div>
+</div>
+{% endblock %}

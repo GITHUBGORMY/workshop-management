@@ -1,0 +1,54 @@
+{% extends "worker/worker_base.html" %}
+{% load static %}
+{%load crispy_forms_tags %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% block content %}
+ <div class=" text-center rounded p-4">
+<div class="card text-center mb-3  ">
+  <div class="card-body card card-light-blue ">
+<div class="table-responsive">
+  <table class="table align-middle table table-bordered">
+    <thead>
+    <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Date</th>
+        <th scope="col">Start time</th>
+        <th scope="col">End time</th>
+        <th scope="col">Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for i in data %}
+    <tr>
+        <td scope="row">{{i.schedule.user}}</td>
+        <td scope="row">{{i.schedule.date}}</td>
+        <td scope="row">{{i.schedule.start_time}}</td>
+        <td scope="row">{{i.schedule.end_time}}</td>
+
+        <td scope="row">
+            {% if i.status == 0 %}
+            <a class="btn btn-primary" href="{% url 'approve_booking' i.id %}" role="button">Accept</a>
+            <a class="btn btn-primary" href="{% url 'reject_booking' i.id %}" role="button">Reject</a>
+            {%elif i.status == 1 %}
+            <a class="btn btn-primary" href="{% url 'approve_booking' i.id %}" role="button">Accepted</a>
+            {% else %}
+            <a class="btn btn-primary" href="{% url 'reject_booking' i.id %}" role="button">Rejected</a>
+            {% endif %}
+        </td>
+
+            {% endfor %}
+            </tbody>
+        </table>
+        {% endblock %}
+</div>
+  </div>
+</div>
+ </div>
+        </body>
+        </html>

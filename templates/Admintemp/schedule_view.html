@@ -1,4 +1,4 @@
-{% extends "Admintemp/index.html" %}
+ {% extends "Admintemp/index.html" %}
 {%load crispy_forms_tags %}
 {% block content %}
 
@@ -9,6 +9,8 @@
   <table class="table align-middle table table-bordered">
                           <thead>
                             <tr>
+                                <th scope="col">name</th>
+<!--                                <th scope="col">categories</th>-->
                               <th scope="col">Date</th>
                               <th scope="col">Start time</th>
                               <th scope="col">End time</th>
@@ -17,9 +19,13 @@
                           <tbody>
                             {% for i in data %}
                             <tr>
+                              <th scope="row">{{i.user}}</th>
                               <th scope="row">{{i.date}}</th>
                               <th scope="row">{{i.start_time}}</th>
                               <th scope="row">{{i.end_time}}</th>
+<!--<td>-->
+<!--    <input type="submit" class="btn btn-danger" value="Appointment"/>-->
+<!--</td>-->
                             </tr>
                             {% endfor %}
                           </tbody>

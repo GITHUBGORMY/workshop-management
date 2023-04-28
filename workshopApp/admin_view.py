@@ -1,14 +1,9 @@
-from django.contrib.auth import authenticate, login
 from django.contrib import messages
-from django.db.models import manager
-from django.shortcuts import render
-from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
 
-from workshopApp.forms import feedbackForm, WorkerCategoryForm, ScheduleForm
-from workshopApp.forms import workerForm
-from workshopApp.models import feedback, category, schedule
+from workshopApp.forms import WorkerCategoryForm, PaymentForm
+from workshopApp.models import feedback, category, schedule, Login, Payment, Appointment
 
 
 def admindash(request):
@@ -46,13 +41,59 @@ def category_view(request):
     data = category.objects.all()
     return render(request, 'Admintemp/category view.html', {'data': data})
 
-
-def Schedule(request):
-    Schedule_form = ScheduleForm()
+def schedule_view(request):
     data = schedule.objects.all()
+    return render(request, 'Admintemp/schedule_view.html', {"data": data})
+
+def accept_worker(request,id):
+    data = Login.objects.get(id=id)
+    data.status=1
+    data.save()
+    return redirect("worker_view")
+
+def reject_worker(request,id):
+    data = Login.objects.get(id=id)
+    data.status=2
+    data.save()
+    return redirect("worker_view")
+def payment_view(request):
+    data = Payment.objects.all()
+    return render(request, 'Admintemp/payment_view.html', {"data": data})
+def approve_payment(request,id):
+    data = Payment.objects.get(id=id)
+    data.status=1
+    data.save()
+    return redirect("payment_view")
+
+def reject_payment(request,id):
+    data = Payment.objects.get(id=id)
+    data.status=2
+    data.save()
+    return redirect("payment_view")
+
+def payment(request):
+    data = Appointment.objects.all()
+    return render(request, 'Admintemp/appointment.html', {'data': data})
+def bill(request):
+    data = Payment.objects.all()
+    return render(request, 'Admintemp/payment_view.html', {"data": data})
+
+def Generate_bill(request,id):
+    payment_form = PaymentForm()
+    data =Payment.objects.all()
     if request.method == 'POST':
-        Schedule_form = ScheduleForm(request.POST)
-        if Schedule_form.is_valid():
-            Schedule_form.save()
-            return redirect('Schedule')
-    return render(request, 'Admintemp/schedule.html', {'schedule': Schedule_form, 'data': data})
+            payment_form = PaymentForm(request.POST)
+            if payment_form.is_valid():
+                payment_form.save()
+                return redirect('bill')
+    return render(request, 'Admintemp/bill.html', {'payment': payment_form ,"data": data})
+
+def bill_update(request,id):
+    pay = Payment.objects.get(id=id)
+    form = PaymentForm(instance=pay)
+    if request.method == 'POST':
+        form = PaymentForm(request.POST,instance=pay)
+        if form.is_valid():
+            form.save()
+            return redirect('bill')
+    return render(request,'Admintemp/bill_update.html',{'form':form})
