@@ -25,7 +25,11 @@
       <td scope="row">{{i.email}}</td>
       <td scope="row">{{i.address}}</td>
       <td scope="row">{{i.phone}}</td>
-      <td scope="row"><img src="{{i.document.url}}" alt="Smiley face" width="200" height="150"></td>
+      <td scope="row">
+          {% if i.profilepicture %}
+    <img src="{{i.profilepicture.url}}" alt="Smiley face" width="200" height="150"></td>
+{% endif %}
+
       <td><a href="{% url 'manager_update' i.id %}">
                         <button type="button" class="btn btn-primary">Update</button>
         </a></td>

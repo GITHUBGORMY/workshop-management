@@ -1,9 +1,16 @@
-{% extends "worker/worker_base.html" %}
+{% extends "customer/customerbase.html" %}
 {%load crispy_forms_tags %}
 {% block content %}
 
 <div class="card text-center mb-3">
   <div class="card-body card card-light-blue">
+       {% if messages %}
+        {% for message in messages %}
+         {% if message.tags %}  <script>alert("{{ message }}")</script> {% endif %}
+
+        {% endfor %}
+
+    {% endif %}
 <div class="table-responsive">
   <table class="table align-middle table table-bordered">
 
@@ -22,7 +29,7 @@
   <tbody>
   {% for i in data %}
     <tr>
-      <td scope="row">{{i.user}}</td>
+      <td scope="row">{{i.customer}}</td>
       <td scope="row">{{i.date}}</td>
       <td scope="row">{{i.message}}</td>
       <td scope="row">{{i.reply}}</td>
@@ -31,6 +38,7 @@
       {% endfor %}
 
  </table>
+
 {% endblock %}
 </div>
   </div>

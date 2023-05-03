@@ -16,6 +16,8 @@
       <th scope="col">phone</th>
       <th scope="col">category</th>
       <th scope="col">profile</th>
+      <th scope="col">Action</th>
+
          <th>
           Update
       </th>
@@ -36,7 +38,16 @@
           {% if i.profilepicture %}
     <img src="{{i.profilepicture.url}}" alt="Smiley face" width="200" height="150"></td>
 {% endif %}
-
+  <td scope="row">
+            {% if i.status == 0 %}
+            <a class="btn btn-primary" href="{% url 'accept_worker' i.id %}" role="button">Accept Worker</a>
+            <a class="btn btn-primary" href="{% url 'reject_worker' i.id %}" role="button">Reject Worker</a>
+            {%elif i.status == 1 %}
+            <a class="btn btn-primary" href="{% url 'accept_worker' i.id %}" role="button">Accepted</a>
+            {% else %}
+            <a class="btn btn-primary" href="{% url 'reject_worker' i.id %}" role="button">Rejected</a>
+            {% endif %}
+        </td>
 
         <td><a href="{% url 'worker_update' i.id %}">
                         <button type="button" class="btn btn-primary">Update</button>

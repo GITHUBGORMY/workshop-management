@@ -21,12 +21,13 @@
         <th scope="col">Start time</th>
         <th scope="col">End time</th>
         <th scope="col">Action</th>
+        <th scope="col">work</th>
     </tr>
     </thead>
     <tbody>
     {% for i in data %}
     <tr>
-        <td scope="row">{{i.schedule.user}}</td>
+        <td scope="row">{{i.schedule.worker}}</td>
         <td scope="row">{{i.schedule.date}}</td>
         <td scope="row">{{i.schedule.start_time}}</td>
         <td scope="row">{{i.schedule.end_time}}</td>
@@ -39,6 +40,16 @@
             <a class="btn btn-primary" href="{% url 'approve_booking' i.id %}" role="button">Accepted</a>
             {% else %}
             <a class="btn btn-primary" href="{% url 'reject_booking' i.id %}" role="button">Rejected</a>
+            {% endif %}
+        </td>
+         <td scope="row">
+            {% if i.done == 0 %}
+            <a class="btn btn-primary" href="{% url 'workdone' i.id %}" role="button">Completed</a>
+            <a class="btn btn-primary" href="{% url 'notdone' i.id %}" role="button">Not Completed</a>
+            {%elif i.status == 1 %}
+            <a class="btn btn-primary" href="{% url 'workdone' i.id %}" role="button">Completed</a>
+            {% else %}
+            <a class="btn btn-primary" href="{% url 'notdone' i.id %}" role="button">Not Completed</a>
             {% endif %}
         </td>
 

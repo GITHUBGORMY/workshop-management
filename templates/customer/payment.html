@@ -18,10 +18,17 @@
                           <tbody>
                             {% for i in data %}
                             <tr>
-                              <th scope="row">{{i.user}}</th>
-                              <th scope="row">{{i.date}}</th>
-                              <th scope="row">{{i.description}}</th>
-                              <th scope="row">{{i.amount}}</th>
+                              <td scope="row">{{i.worker}}</td>
+                              <td scope="row">{{i.date}}</td>
+                              <td scope="row">{{i.description}}</td>
+                              <td scope="row">{{i.amount}}</td>
+                              <td scope="row">
+            {% if i.status == 0 %}
+            <a class="btn btn-primary" href="{% url 'onlinepayment' i.id %}" role="button">pay now</a>
+            {% else %}
+            <a class="btn btn-primary"  href="{% url 'approve_payment' i.id %}" role="button">Paid</a>
+            {% endif %}</td>
+
 
                             </tr>
                             {% endfor %}

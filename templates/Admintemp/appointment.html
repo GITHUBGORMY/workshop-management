@@ -10,28 +10,45 @@
                           <thead>
                             <tr>
                                 <th scope="col">name</th>
-                              <th scope="col">Description</th>
-                              <th scope="col">Status</th>
                               <th scope="col">Start time</th>
                               <th scope="col">End time</th>
-                               <th scope="col">Date</th>
+                               <th scope="col">Work done or not</th>
                                <th scope="col">Generate bill</th>
                             </tr>
                           </thead>
                           <tbody>
                             {% for i in data %}
                             <tr>
-                              <td scope="row">{{i.user}}</td>
-                              <td scope="row">{{i.description}}</td>
-                              <td scope="row">{{i.status}}</td>
+                              <td scope="row">{{i.worker}}</td>
                               <td scope="row">{{i.schedule.start_time}}</td>
                               <td scope="row">{{i.schedule.end_time}}</td>
-                              <td scope="row">{{i.schedule.date}}</td>
-                                 <td>
-                                  <a  href="{% url 'bill' %}">
-                                        <input class="btn btn-primary" type="button" value="Bill">
-                                    </a>
-                              </td>
+                              <td>
+            {% if i.done == 0 %}
+                 <button type="button" class="btn btn-warning">pending</button>
+            {% elif i.done == 1 %}
+                 <button type="button" class="btn btn-success">Work Done</button>
+            {% else %}
+                  <button type="button" class="btn btn-danger">Not Done</button>
+            {% endif %}
+        </td>
+              <td scope="row">
+            {% if i.status == 0 %}
+            <a class="btn btn-primary" href="{% url 'Generate_bill' i.id %}" role="button">Generate bill</a>
+            {% else %}
+            <a class="btn btn-primary"  role="button">Paid </a>
+            {% endif %}</td>
+
+
+
+
+
+
+
+
+
+<!--                              <td><a href="{% url 'Generate_bill' i.id %}">-->
+<!--                      <button type="button" class="btn btn-primary">Bill</button>-->
+<!--        </a></td>-->
 
                             </tr>
                             {% endfor %}

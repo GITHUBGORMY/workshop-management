@@ -14,18 +14,18 @@
                               <th scope="col">Date</th>
                               <th scope="col">Start time</th>
                               <th scope="col">End time</th>
+
                             </tr>
                           </thead>
                           <tbody>
                             {% for i in data %}
                             <tr>
-                              <th scope="row">{{i.user}}</th>
+                              <th scope="row">{{i.worker}}</th>
                               <th scope="row">{{i.date}}</th>
                               <th scope="row">{{i.start_time}}</th>
                               <th scope="row">{{i.end_time}}</th>
-<!--<td>-->
-<!--    <input type="submit" class="btn btn-danger" value="Appointment"/>-->
-<!--</td>-->
+
+
                             </tr>
                             {% endfor %}
                           </tbody>

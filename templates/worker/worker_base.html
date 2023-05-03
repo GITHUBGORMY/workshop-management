@@ -318,18 +318,18 @@
           </li>
           <li class="nav-item">
 
-           <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-              <i class="icon-layout menu-icon"></i>
-              <span class="menu-title">Feedback</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="ui-basic">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href=" {% url 'feedbak_register' %} " >register</a></li>
-                <li class="nav-item"> <a class="nav-link" href="{%url 'feedback_view' %}">View</a></li>
-<!--                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Typography</a></li>-->
-              </ul>
-            </div>
+<!--           <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">-->
+<!--              <i class="icon-layout menu-icon"></i>-->
+<!--              <span class="menu-title">Feedback</span>-->
+<!--              <i class="menu-arrow"></i>-->
+<!--            </a>-->
+<!--            <div class="collapse" id="ui-basic">-->
+<!--              <ul class="nav flex-column sub-menu">-->
+<!--                <li class="nav-item"> <a class="nav-link" href=" {% url 'feedbak_register' %} " >register</a></li>-->
+<!--                <li class="nav-item"> <a class="nav-link" href="{%url 'feedback_view' %}">View</a></li>-->
+<!--&lt;!&ndash;                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Typography</a></li>&ndash;&gt;-->
+<!--              </ul>-->
+<!--            </div>-->
           </li>
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href=" #charts" aria-expanded="false" aria-controls="charts">
@@ -406,6 +406,10 @@
       <div class="main-panel">
         <div class="content-wrapper">
           <div class="row">
+            <script>
+    alert('{{ message }}');
+</script>
+
             {% block content %}
                     <div class="card">
   <div class="card card--light-blue">

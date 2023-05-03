@@ -5,6 +5,13 @@
  <div class=" text-center rounded p-4">
 <div class="card text-center mb-3  ">
   <div class="card-body card card-light-blue ">
+        {% if messages %}
+        {% for message in messages %}
+         {% if message.tags %}  <script>alert("{{ message }}")</script> {% endif %}
+
+        {% endfor %}
+
+    {% endif %}
 <div class="table-responsive">
   <table class="table align-middle table table-bordered">
                           <thead>

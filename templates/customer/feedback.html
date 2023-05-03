@@ -1,4 +1,4 @@
-{% extends "worker/worker_base.html" %}
+{% extends "customer/customerbase.html" %}
 {%load crispy_forms_tags %}
 {% block content %}
 
@@ -9,7 +9,13 @@
             {{feedback_form}}
           <button type="submit" class="btn btn-primary py-3 w-100 mb-4">Submit</button>
       </form>
+     {% if messages %}
+        {% for message in messages %}
+         {% if message.tags %}  <script>alert("{{ message }}")</script> {% endif %}
 
+        {% endfor %}
+
+    {% endif %}
 
   </div>
 </div>

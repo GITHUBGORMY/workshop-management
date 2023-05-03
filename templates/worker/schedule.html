@@ -11,6 +11,11 @@
                     <button type="submit" class="btn btn-sm btn-success">Submit</button>
                   </div>
       </form>
+      <div>
+          {%for message in messages%}
+          {{message}}
+          {% endfor %}
+      </div>
   </div>
 </div>
 {% endblock %}
