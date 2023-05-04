@@ -43,6 +43,7 @@ urlpatterns=[
     # path('bill', admin_view.bill, name='bill'),
     # path('bill_update/<int:id>/', admin_view.bill_update, name='bill_update'),
     path('Generate_bill/<int:id>/', admin_view.Generate_bill, name='Generate_bill'),
+    path('search_product', admin_view.search_product, name='search_product'),
 
 
 #worker

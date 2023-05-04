@@ -80,6 +80,15 @@ def Generate_bill(request,id):
                 return redirect('payment')
     return render(request, 'Admintemp/bill.html', {'payment': payment_form})
 
+def search_product(request):
+    if request.method == "POST":
+        query_name = request.POST.get('name', None)
+        if query_name:
+            results = Login.objects.filter(name__contains=query_name)
+            return render(request, 'Admintemp/search.html', {"results":results})
+
+    return render(request, 'Admintemp/worker_view.html')
+
 # def bill_update(request,id):
 #     pay = Payment.objects.get(id=id)
 #     form = PaymentForm(instance=pay)

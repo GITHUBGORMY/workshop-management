@@ -1,8 +1,9 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 from django.shortcuts import render, redirect
 
-
+from workshopApp.filter import workerfilter
 from workshopApp.forms import feedbackForm, ScheduleForm, PaymentForm
 from workshopApp.models import feedback, Login, schedule, Appointment
 
@@ -89,4 +90,3 @@ def Paymentfun(request):
             messages.info(request, 'successfully complete')
             return redirect('Paymentfun')
     return render(request, 'worker/payment.html', {'payment': payment_form})
-

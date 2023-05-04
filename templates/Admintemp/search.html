@@ -1,0 +1,77 @@
+{% extends "Admintemp/index.html" %}
+{%block content%}
+ <div class="bg-secondary text-center rounded p-4">
+<div class="card text-center mb-3  ">
+  <div class="card-body card card-light-blue ">
+<!--     <form action="{% url 'search_product' %}" method="POST">-->
+<!--    {% csrf_token %}-->
+<!--    <input type="text" name="name">-->
+<!--    <input type="submit" name="submit" value="Search">-->
+<!--</form>-->
+<div class="table-responsive">
+
+  <table class="table align-middle table table-bordered">
+
+  <thead>
+
+    <tr>
+
+      <th scope="col">name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Address</th>
+      <th scope="col">phone</th>
+      <th scope="col">category</th>
+      <th scope="col">profile</th>
+      <th scope="col">Action</th>
+
+         <th>
+          Update
+      </th>
+        <th>Delete
+        </th>
+
+    </tr>
+  </thead>
+  <tbody>
+ {% for result in results %}
+    <tr>
+      <td scope="row">{{result.name}}</td>
+      <td scope="row">{{result.email}}</td>
+      <td scope="row">{{result.address}}</td>
+      <td scope="row">{{result.phone}}</td>
+      <td scope="row">{{result.category}}</td>
+      <td scope="row">
+          {% if result.profilepicture %}
+    <img src="{{result.profilepicture.url}}" alt="Smiley face" width="200" height="150"></td>
+{% endif %}
+  <td scope="row">
+            {% if result.status == 0 %}
+            <a class="btn btn-primary" href="{% url 'accept_worker' result.id %}" role="button">Accept Worker</a>
+            <a class="btn btn-primary" href="{% url 'reject_worker' result.id %}" role="button">Reject Worker</a>
+            {%elif result.status == 1 %}
+            <a class="btn btn-primary" href="{% url 'accept_worker' result.id %}" role="button">Accepted</a>
+            {% else %}
+            <a class="btn btn-primary" href="{% url 'reject_worker' result.id %}" role="button">Rejected</a>
+            {% endif %}
+        </td>
+
+        <td><a href="{% url 'worker_update' result.id %}">
+                        <button type="button" class="btn btn-primary">Update</button>
+        </a></td>
+<td>
+ <form action="{% url 'worker_delete' result.id %}"method="POST" class="d-inline-block">
+    {%csrf_token %}
+    <input type="submit" class="btn btn-danger" value="Delete"/>
+   </form>
+     </td>
+    </tr>
+
+  </tbody>
+      {% endfor %}
+ </table>
+{% endblock %}
+</div>
+
+  </div>
+</div>
+ </div>
