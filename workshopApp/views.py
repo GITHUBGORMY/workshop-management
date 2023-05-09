@@ -9,7 +9,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views.decorators.cache import cache_control
 
-
+from workshopApp.filter import WorkerFilter
 from workshopApp.forms import managerForm
 from workshopApp.forms import workerForm
 from workshopApp.models import Login
@@ -106,8 +106,11 @@ def manager_register(request):
 #
 @login_required
 def work_view(request):
-    data = Login.objects.filter(is_worker=True)
-    return render(request,'Admintemp/worker_view.html',{"data":data})
+    worker_list = Login.objects.filter(is_worker=True)
+    worker_filter = WorkerFilter(request.GET, queryset=worker_list)
+    worker_list = worker_filter.qs
+    return render(request, 'Admintemp/worker_view.html', {"worker_list": worker_list, "worker_filter": worker_filter})
+
 @login_required
 def accept_worker(request,id):
     data = Login.objects.get(id=id)

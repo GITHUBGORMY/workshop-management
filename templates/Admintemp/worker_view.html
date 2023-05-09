@@ -3,11 +3,18 @@
  <div class="bg-secondary text-center rounded p-4">
 <div class="card text-center mb-3  ">
   <div class="card-body card card-light-blue ">
-       <form action="{% url 'search_product' %}" method="POST" style="float:right" class="form:inline">
-    {% csrf_token %}
-    <input type="text" name="name">
-           <button class="btn btn-primary" type="submit" name="submit" >Search</button>
-</form>
+      <form method="get" class="form-inline">
+          <div class="md-form my-0">
+              {{worker_filter.form|crispy}}
+
+              <button class="btn btn-primary" type="submit">Search</button>
+          </div>
+      </form>
+<!--       <form action="{% url 'search_product' %}" method="POST" style="float:right" class="form:inline">-->
+<!--    {% csrf_token %}-->
+<!--    <input type="text" name="name">-->
+<!--           <button class="btn btn-primary" type="submit" name="submit" >Search</button>-->
+<!--</form>-->
 <div class="table-responsive">
 
   <table class="table align-middle table table-bordered">
